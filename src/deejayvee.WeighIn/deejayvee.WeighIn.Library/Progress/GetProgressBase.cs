@@ -20,7 +20,17 @@ namespace deejayvee.WeighIn.Library.Progress
             {
                 using (IDynamoDBContext context = Factory.DynamoDBContext)
                 {
+                    Factory.Logger.Log("Loading User");
+
                     progress.User = context.LoadAsync<WeighInUser>(userId, firstName).Result;
+
+                    if (progress.User==null)
+                    {
+                        Factory.Logger.Log("User not found");
+                        throw new WeighInException($"User \"{userId},{firstName}\" not found");
+                    }
+
+                    Factory.Logger.Log("User loaded");
 
                     DateTime week1Start = DateTime.Today.AddDays(-6);
                     DateTime week1End = DateTime.Today;
@@ -38,10 +48,23 @@ namespace deejayvee.WeighIn.Library.Progress
                     DateTime week4End = week3End.AddDays(-7);
                     IEnumerable<object> week4 = (new List<object>() { week4Start, week4End });
 
+                    Factory.Logger.Log("Loading Weights Week 1");
+
                     progress.WeightsLastWeek = context.QueryAsync<WeighInWeight>(progress.User.UserKey, QueryOperator.Between, week1).GetRemainingAsync().Result.Select(W => W.Weight).ToList();
+
+                    Factory.Logger.Log("Loading Weights Week 2");
+
                     progress.Weights2WeeksAgo = context.QueryAsync<WeighInWeight>(progress.User.UserKey, QueryOperator.Between, week2).GetRemainingAsync().Result.Select(W => W.Weight).ToList();
+
+                    Factory.Logger.Log("Loading Weights Week 3");
+
                     progress.Weights3WeeksAgo = context.QueryAsync<WeighInWeight>(progress.User.UserKey, QueryOperator.Between, week3).GetRemainingAsync().Result.Select(W => W.Weight).ToList();
+
+                    Factory.Logger.Log("Loading Weights Week 4");
+
                     progress.Weights4WeeksAgo = context.QueryAsync<WeighInWeight>(progress.User.UserKey, QueryOperator.Between, week4).GetRemainingAsync().Result.Select(W => W.Weight).ToList();
+
+                    Factory.Logger.Log("4 weeks loaded");
                 }
             }
             catch (Exception ex)

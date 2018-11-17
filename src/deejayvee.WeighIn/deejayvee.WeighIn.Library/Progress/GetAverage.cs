@@ -19,6 +19,8 @@ namespace deejayvee.WeighIn.Library.Progress
                 ProgressAverage average = new ProgressAverage();
                 LoadProgress(userId, firstName, average);
 
+                Factory.Logger.Log($"AverageLastWeek = \"{average.AverageLastWeek}\"");
+
                 return JsonConvert.SerializeObject(average);
             }
             catch (Exception ex)

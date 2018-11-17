@@ -7,19 +7,27 @@ namespace deejayvee.WeighIn.Library.Model
 {
     public class ProgressTotal : ProgressBase
     {
-        public decimal TotalWeightLoss
+        public decimal? TotalWeightLoss
         {
             get
             {
-                return Math.Abs(WeightsLastWeek.Min() - User.StartingWeight);
+                if (!WeightsLastWeek.Any() || WeightsLastWeek?.Min()==null || User==null || !User.StartingWeight.HasValue)
+                {
+                    return null;
+                }
+                return Math.Abs(WeightsLastWeek.Min() - User.StartingWeight.Value);
             }
         }
 
-        public TimeSpan TotalPeriod
+        public TimeSpan? TotalPeriod
         {
             get
             {
-                return DateTime.Today.Subtract(User.StartingWeightDate);
+                if (User == null || !User.StartingWeight.HasValue)
+                {
+                    return null;
+                }
+                return DateTime.Today.Subtract(User.StartingWeightDate.Value);
             }
         }
     }

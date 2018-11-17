@@ -25,12 +25,15 @@ namespace deejayvee.WeighIn.Library.User
                 {
                     Factory.Logger.Log($"User does not have a user key");
                     user.UserKey = Guid.NewGuid().ToString();
-}
+                }
+
                 Factory.Logger.Log($"Using User ID: {user.UserId}");
                 Factory.Logger.Log($"Using Firstname: {user.FirstName}");
                 Factory.Logger.Log($"Using User Key: {user.UserKey}");
                 Factory.Logger.Log($"Using Weight Date: {user.StartingWeightDate}");
                 Factory.Logger.Log($"Using Weight: {user.StartingWeight}");
+
+                user.LastUseDateTime = DateTime.Now;
 
                 using (IDynamoDBContext context = Factory.DynamoDBContext)
                 {

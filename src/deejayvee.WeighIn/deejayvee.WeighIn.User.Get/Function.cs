@@ -28,9 +28,19 @@ namespace deejayvee.WeighIn.User.Get
             using (AwsFactory factory = new AwsFactory(context.Logger))
             {
                 string userId = request.PathParameters["userId"];
-                string firstName = request.PathParameters["firstName"];
-
                 context.Logger.LogLine($"userId=\"{userId}\"");
+                
+                string firstName;
+
+                if (request.PathParameters.ContainsKey("firstName"))
+                {
+                    firstName = request.PathParameters["firstName"];
+                }
+                else
+                {
+                    firstName = null;
+                }
+
                 context.Logger.LogLine($"firstName=\"{firstName}\"");
 
                 using (GetUser getUser = new GetUser(factory))

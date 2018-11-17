@@ -10,7 +10,7 @@ namespace deejayvee.WeighIn.Test.Progress
     public class GetMinimumTEST : TestBase
     {
         [Test]
-        public void TestRetrieve()
+        public void TestRetrieve_FullValues()
         {
             ProgressMinimum minimum = new ProgressMinimum()
             {
@@ -63,6 +63,55 @@ namespace deejayvee.WeighIn.Test.Progress
             Assert.That(minimum.MinimumDifferenceLastWeek, Is.EqualTo(-1.1m));
             Assert.That(minimum.MinimumDifference2WeeksAgo, Is.EqualTo(-0.5m));
             Assert.That(minimum.MinimumDifference3WeeksAgo, Is.EqualTo(-0.5m));
+        }
+
+        [Test]
+        public void TestRetrieve_Only1Week()
+        {
+            ProgressMinimum minimum = new ProgressMinimum()
+            {
+                WeightsLastWeek = new List<decimal>()
+                {
+                    108.5m,
+                    108.1m,
+                    108.5m,
+                    108.4m,
+                    108.3m,
+                    108.3m,
+                    107.7m
+                },
+                Weights2WeeksAgo = new List<decimal>(),
+                Weights3WeeksAgo = new List<decimal>(),
+                Weights4WeeksAgo = new List<decimal>()
+            };
+
+            Assert.That(minimum.MinimumLastWeek, Is.EqualTo(107.7m));
+            Assert.That(minimum.Minimum2WeeksAgo, Is.Null);
+            Assert.That(minimum.Minimum3WeeksAgo, Is.Null);
+            Assert.That(minimum.Minimum4WeeksAgo, Is.Null);
+            Assert.That(minimum.MinimumDifferenceLastWeek, Is.Null);
+            Assert.That(minimum.MinimumDifference2WeeksAgo, Is.Null);
+            Assert.That(minimum.MinimumDifference3WeeksAgo, Is.Null);
+        }
+
+        [Test]
+        public void TestRetrieve_NoValues()
+        {
+            ProgressMinimum minimum = new ProgressMinimum()
+            {
+                WeightsLastWeek = new List<decimal>(),
+                Weights2WeeksAgo = new List<decimal>(),
+                Weights3WeeksAgo = new List<decimal>(),
+                Weights4WeeksAgo = new List<decimal>()
+            };
+
+            Assert.That(minimum.MinimumLastWeek, Is.Null);
+            Assert.That(minimum.Minimum2WeeksAgo, Is.Null);
+            Assert.That(minimum.Minimum3WeeksAgo, Is.Null);
+            Assert.That(minimum.Minimum4WeeksAgo, Is.Null);
+            Assert.That(minimum.MinimumDifferenceLastWeek, Is.Null);
+            Assert.That(minimum.MinimumDifference2WeeksAgo, Is.Null);
+            Assert.That(minimum.MinimumDifference3WeeksAgo, Is.Null);
         }
     }
 }

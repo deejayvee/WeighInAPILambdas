@@ -3,6 +3,7 @@ using deejayvee.WeighIn.Library.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace deejayvee.WeighIn.Library.User
@@ -19,8 +20,23 @@ namespace deejayvee.WeighIn.Library.User
             {
                 using (IDynamoDBContext context = Factory.DynamoDBContext)
                 {
-                    WeighInUser user = context.LoadAsync<WeighInUser>(userId, firstName).Result;
-
+                    WeighInUser user;
+                    if (string.IsNullOrEmpty(firstName))
+                    {
+                        List<WeighInUser> users = context.QueryAsync<WeighInUser>(userId).GetRemainingAsync().Result.ToList();
+                        if (!users.Any())
+                        {
+                            user = null;
+                        }
+                        else
+                        {
+                            user = users.OrderByDescending(W => W.LastUseDateTime).FirstOrDefault();
+                        }
+                    }
+                    else
+                    {
+                        user = context.LoadAsync<WeighInUser>(userId, firstName).Result;
+                    }
                     return JsonConvert.SerializeObject(user);
                 }
             }

@@ -17,8 +17,10 @@ namespace deejayvee.WeighIn.Library.Model
         [DynamoDBProperty(AttributeName = "userKey")]
         public string UserKey { get; set; }
         [DynamoDBProperty(AttributeName = "startingWeight")]
-        public decimal StartingWeight { get; set; }
+        public decimal? StartingWeight { get; set; }
         [DynamoDBProperty(AttributeName = "startingWeightDate")]
-        public DateTime StartingWeightDate { get; set; }
+        public DateTime? StartingWeightDate { get; set; }
+        [DynamoDBProperty(AttributeName = "lastUseDateTime")]
+        public DateTime? LastUseDateTime { get; set; }
     }
 }

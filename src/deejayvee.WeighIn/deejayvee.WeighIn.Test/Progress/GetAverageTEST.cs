@@ -1,6 +1,7 @@
 ﻿using deejayvee.WeighIn.Library;
 using deejayvee.WeighIn.Library.Model;
 using deejayvee.WeighIn.Library.Progress;
+using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace deejayvee.WeighIn.Test.Progress
     public class GetAverageTEST : TestBase
     {
         [Test]
-        public void TestRetrieve()
+        public void TestRetrieve_FullValues()
         {
             ProgressAverage average = new ProgressAverage()
             {
@@ -65,6 +66,59 @@ namespace deejayvee.WeighIn.Test.Progress
             Assert.That(average.AverageDifferenceLastWeek, Is.EqualTo(-1.04m));
             Assert.That(average.AverageDifference2WeeksAgo, Is.EqualTo(-0.37m));
             Assert.That(average.AverageDifference3WeeksAgo, Is.EqualTo(-0.74m));
+        }
+
+        [Test]
+        public void TestRetrieve_Only1Week()
+        {
+            ProgressAverage average = new ProgressAverage()
+            {
+                WeightsLastWeek = new List<decimal>()
+                {
+                    108.5m,
+                    108.1m,
+                    108.5m,
+                    108.4m,
+                    108.3m,
+                    108.3m,
+                    107.7m
+                },
+                Weights2WeeksAgo = new List<decimal>(),
+                Weights3WeeksAgo = new List<decimal>(),
+                Weights4WeeksAgo = new List<decimal>()
+            };
+
+            Assert.That(average.AverageLastWeek, Is.EqualTo(108.26m));
+            Assert.That(average.Average2WeeksAgo, Is.Null);
+            Assert.That(average.Average3WeeksAgo, Is.Null);
+            Assert.That(average.Average4WeeksAgo, Is.Null);
+            Assert.That(average.AverageDifferenceLastWeek, Is.Null);
+            Assert.That(average.AverageDifference2WeeksAgo, Is.Null);
+            Assert.That(average.AverageDifference3WeeksAgo, Is.Null);
+        }
+
+        [Test]
+        public void TestRetrieve_NoValues()
+        {
+            ProgressAverage average = new ProgressAverage()
+            {
+                WeightsLastWeek = new List<decimal>(),
+                Weights2WeeksAgo = new List<decimal>(),
+                Weights3WeeksAgo = new List<decimal>(),
+                Weights4WeeksAgo = new List<decimal>()
+            };
+
+            Assert.That(average.AverageLastWeek, Is.Null);
+            Assert.That(average.Average2WeeksAgo, Is.Null);
+            Assert.That(average.Average3WeeksAgo, Is.Null);
+            Assert.That(average.Average4WeeksAgo, Is.Null);
+            Assert.That(average.AverageDifferenceLastWeek, Is.Null);
+            Assert.That(average.AverageDifference2WeeksAgo, Is.Null);
+            Assert.That(average.AverageDifference3WeeksAgo, Is.Null);
+
+            string jsonResult = JsonConvert.SerializeObject(average);
+            Console.WriteLine(jsonResult);
+            Assert.That(jsonResult, Is.Not.Null.And.Not.Empty);
         }
     }
 }

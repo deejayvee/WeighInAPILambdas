@@ -1,4 +1,5 @@
 ﻿using Amazon.DynamoDBv2.DataModel;
+using Amazon.DynamoDBv2.DocumentModel;
 using deejayvee.WeighIn.Library;
 using deejayvee.WeighIn.Library.Model;
 using deejayvee.WeighIn.Library.User;
@@ -6,6 +7,7 @@ using Moq;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 

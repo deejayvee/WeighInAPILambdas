@@ -7,59 +7,113 @@ namespace deejayvee.WeighIn.Library.Model
 {
     public class ProgressAverage : ProgressBase
     {
-        public decimal AverageLastWeek
+        public decimal? AverageLastWeek
         {
             get
             {
-                return Math.Round(WeightsLastWeek.Average(), 2);
+                if (WeightsLastWeek.Any())
+                {
+                    decimal? average = WeightsLastWeek?.Average();
+                    if (average.HasValue)
+                    {
+                        return Math.Round(average.Value, 2);
+                    }
+                }
+                return null;
             }
         }
 
-        public decimal Average2WeeksAgo
+        public decimal? Average2WeeksAgo
         {
             get
             {
-                return Math.Round(Weights2WeeksAgo.Average(), 2);
+                if (Weights2WeeksAgo.Any())
+                {
+                    decimal? average = Weights2WeeksAgo?.Average();
+                    if (average.HasValue)
+                    {
+                        return Math.Round(average.Value, 2);
+                    }
+                }
+
+                return null;
             }
         }
 
-        public decimal Average3WeeksAgo
+        public decimal? Average3WeeksAgo
         {
             get
             {
-                return Math.Round(Weights3WeeksAgo.Average(), 2);
+                if (Weights3WeeksAgo.Any())
+                {
+                    decimal? average = Weights3WeeksAgo?.Average();
+                    if (average.HasValue)
+                    {
+                        return Math.Round(average.Value, 2);
+                    }
+                }
+                return null;
             }
         }
 
-        public decimal Average4WeeksAgo
+        public decimal? Average4WeeksAgo
         {
             get
             {
-                return Math.Round(Weights4WeeksAgo.Average(), 2);
+                if (Weights4WeeksAgo.Any())
+                {
+                    decimal? average = Weights4WeeksAgo?.Average();
+                    if (average.HasValue)
+                    {
+                        return Math.Round(average.Value, 2);
+                    }
+                }
+                return null;
             }
         }
 
-        public decimal AverageDifferenceLastWeek
+        public decimal? AverageDifferenceLastWeek
         {
             get
             {
-                return AverageLastWeek - Average2WeeksAgo;
+                if (AverageLastWeek.HasValue && Average2WeeksAgo.HasValue)
+                {
+                    return AverageLastWeek.Value - Average2WeeksAgo.Value;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public decimal AverageDifference2WeeksAgo
+        public decimal? AverageDifference2WeeksAgo
         {
             get
             {
-                return Average2WeeksAgo - Average3WeeksAgo;
+                if (Average2WeeksAgo.HasValue && Average3WeeksAgo.HasValue)
+                {
+                    return Average2WeeksAgo - Average3WeeksAgo;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 
-        public decimal AverageDifference3WeeksAgo
+        public decimal? AverageDifference3WeeksAgo
         {
             get
             {
-                return Average3WeeksAgo - Average4WeeksAgo;
+                if (Average3WeeksAgo.HasValue && Average4WeeksAgo.HasValue)
+                {
+                    return Average3WeeksAgo - Average4WeeksAgo;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
     }
