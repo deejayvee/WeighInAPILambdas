@@ -33,6 +33,9 @@ namespace deejayvee.WeighIn.Library.User
                 Factory.Logger.Log($"Using Weight Date: {user.StartingWeightDate}");
                 Factory.Logger.Log($"Using Weight: {user.StartingWeight}");
 
+                user.LastUseDateTime = DateTimeHelper.SydneyNow;
+                Factory.Logger.Log($"Using Weight Date: {user.LastUseDateTime}");
+
                 user.LastUseDateTime = DateTime.Now;
 
                 using (IDynamoDBContext context = Factory.DynamoDBContext)

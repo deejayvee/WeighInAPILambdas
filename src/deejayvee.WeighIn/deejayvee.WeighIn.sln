@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "deejayvee.WeighIn.Progress.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "deejayvee.WeighIn.Progress.Total.Get", "deejayvee.WeighIn.Progress.Total.Get\deejayvee.WeighIn.Progress.Total.Get.csproj", "{EB936E86-9F56-48C3-8E21-D53C2786770A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deejayvee.WeighIn.Library", "deejayvee.WeighIn.Library\deejayvee.WeighIn.Library.csproj", "{CF5B1C9C-5212-4EA9-B9A4-93654A65B82B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "deejayvee.WeighIn.Library", "deejayvee.WeighIn.Library\deejayvee.WeighIn.Library.csproj", "{CF5B1C9C-5212-4EA9-B9A4-93654A65B82B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deejayvee.WeighIn.Test", "deejayvee.WeighIn.Test\deejayvee.WeighIn.Test.csproj", "{7F03F9AD-2FEC-4C20-85C4-73A99B9552C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "deejayvee.WeighIn.Test", "deejayvee.WeighIn.Test\deejayvee.WeighIn.Test.csproj", "{7F03F9AD-2FEC-4C20-85C4-73A99B9552C0}"
+EndProject
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "deejayvee.WeighIn.Alexa.Skill", "deejayvee.WeighIn.Alexa.Skill\deejayvee.WeighIn.Alexa.Skill.njsproj", "{93A99353-34B5-47FA-87C9-63D274E18909}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{7F03F9AD-2FEC-4C20-85C4-73A99B9552C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F03F9AD-2FEC-4C20-85C4-73A99B9552C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F03F9AD-2FEC-4C20-85C4-73A99B9552C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A99353-34B5-47FA-87C9-63D274E18909}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A99353-34B5-47FA-87C9-63D274E18909}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A99353-34B5-47FA-87C9-63D274E18909}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A99353-34B5-47FA-87C9-63D274E18909}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

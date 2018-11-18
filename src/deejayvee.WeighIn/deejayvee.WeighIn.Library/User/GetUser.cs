@@ -37,6 +37,15 @@ namespace deejayvee.WeighIn.Library.User
                     {
                         user = context.LoadAsync<WeighInUser>(userId, firstName).Result;
                     }
+
+                    if (user==null)
+                    {
+                        user = new WeighInUser()
+                        {
+                            UserId = userId,
+                            FirstName = firstName
+                        };
+                    }
                     return JsonConvert.SerializeObject(user);
                 }
             }
